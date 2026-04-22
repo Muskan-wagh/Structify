@@ -2,27 +2,35 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 
 export function Navigation() {
   const pathname = usePathname();
 
-  const navItems = [
-    { href: '/', label: 'Dashboard' },
-    { href: '/idea', label: 'Idea Generator' },
-    { href: '/structure', label: 'Structure' },
-    { href: '/pitch', label: 'Pitch' },
-  ];
-
   return (
-    <nav className="flex gap-2 p-4 border-b">
-      {navItems.map((item) => (
-        <Link key={item.href} href={item.href}>
-          <Button variant={pathname === item.href ? 'default' : 'ghost'}>
-            {item.label}
-          </Button>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <Link href="/" className="text-xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+            <div className="w-4 h-4 bg-white rounded-sm rotate-45" />
+          </div>
+          Sanctuary AI
         </Link>
-      ))}
+
+        <div className="hidden md:flex items-center gap-8">
+          <Link href="/dashboard" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Dashboard</Link>
+          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Features</Link>
+          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">How it Works</Link>
+          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Docs</Link>
+          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Pricing</Link>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <Link href="#" className="text-sm font-semibold text-gray-700 hover:text-gray-900 px-4">Login</Link>
+          <Link href="/idea" className="btn-primary py-2.5 px-6 text-sm">
+            Get Started
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }
