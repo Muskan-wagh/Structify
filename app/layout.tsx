@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Hackathon Co-Pilot",
+  title: "Structify - AI Hackathon Co-Pilot",
   description: "Help students go from idea to pitch during hackathons",
 };
 
