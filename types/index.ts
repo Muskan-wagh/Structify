@@ -9,6 +9,7 @@ export interface Project {
   created_at: string;
   domain: string;
   title: string;
+  idea?: string;
   problem: string;
   usefulness: string;
   problem_statement: string;

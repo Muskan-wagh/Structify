@@ -102,7 +102,7 @@ export default function DashboardPage() {
         {/* Projects Grid */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-gray-900">Your Projects</h2>
-          
+
           {loading ? (
             <div className="card p-12 text-center">
               <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
@@ -133,8 +133,8 @@ export default function DashboardPage() {
                       </span>
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{project.title}</h3>
-                    <p className="text-sm text-gray-500 line-clamp-2 mb-4">{project.problem || project.idea}</p>
-                    
+                    <p className="text-sm text-gray-500 line-clamp-2 mb-4">{project.problem}</p>
+
                     <div className="flex items-center gap-2 flex-wrap mb-4">
                       {(project.tech_stack || []).slice(0, 3).map((tech, i) => (
                         <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-md text-gray-600">
