@@ -38,56 +38,58 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-              <LayoutDashboard className="w-8 h-8 text-primary" />
-              Dashboard
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-3">
+              <LayoutDashboard className="w-7 h-7 md:w-8 md:h-8 text-primary" />
+              <span className="hidden sm:inline">Dashboard</span>
+              <span className="sm:hidden">Dashboard</span>
             </h1>
-            <p className="text-gray-500 mt-1">Manage your projects and ideas</p>
+            <p className="text-gray-500 mt-1 text-sm md:text-base">Manage your projects and ideas</p>
           </div>
-          <Link href="/idea" className="btn-primary flex items-center gap-2">
+          <Link href="/idea" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
             <Plus className="w-5 h-5" />
-            New Project
+            <span className="sm:hidden">New</span>
+            <span className="hidden sm:inline">New Project</span>
           </Link>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="card p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <LayoutDashboard className="w-6 h-6 text-primary" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="card p-4 md:p-6">
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <LayoutDashboard className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 font-medium">Total Projects</p>
-                <p className="text-3xl font-bold text-gray-900">{projects.length}</p>
+                <p className="text-xs md:text-sm text-gray-500 font-medium">Total Projects</p>
+                <p className="text-2xl md:text-3xl font-bold text-gray-900">{projects.length}</p>
               </div>
             </div>
           </div>
-          <div className="card p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <Tag className="w-6 h-6 text-emerald-600" />
+          <div className="card p-4 md:p-6">
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                <Tag className="w-5 h-5 md:w-6 md:h-6 text-emerald-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 font-medium">Unique Domains</p>
-                <p className="text-3xl font-bold text-gray-900">
+                <p className="text-xs md:text-sm text-gray-500 font-medium">Unique Domains</p>
+                <p className="text-2xl md:text-3xl font-bold text-gray-900">
                   {new Set(projects.map(p => p.domain)).size}
                 </p>
               </div>
             </div>
           </div>
-          <div className="card p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-blue-600" />
+          <div className="card p-4 md:p-6 sm:col-span-2 md:col-auto">
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                <Calendar className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 font-medium">This Month</p>
-                <p className="text-3xl font-bold text-gray-900">
+                <p className="text-xs md:text-sm text-gray-500 font-medium">This Month</p>
+                <p className="text-2xl md:text-3xl font-bold text-gray-900">
                   {projects.filter(p => {
                     const created = new Date(p.created_at);
                     const now = new Date();
@@ -101,41 +103,41 @@ export default function DashboardPage() {
 
         {/* Projects Grid */}
         <div className="space-y-4">
-          <h2 className="text-xl font-bold text-gray-900">Your Projects</h2>
+          <h2 className="text-lg md:text-xl font-bold text-gray-900">Your Projects</h2>
 
           {loading ? (
-            <div className="card p-12 text-center">
-              <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-gray-500">Loading projects...</p>
+            <div className="card p-8 md:p-12 text-center">
+              <div className="w-6 h-6 md:w-8 md:h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <p className="text-gray-500 text-sm md:text-base">Loading projects...</p>
             </div>
           ) : projects.length === 0 ? (
-            <div className="card p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                <LayoutDashboard className="w-8 h-8 text-gray-400" />
+            <div className="card p-8 md:p-12 text-center">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+                <LayoutDashboard className="w-6 h-6 md:w-8 md:h-8 text-gray-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">No projects yet</h3>
-              <p className="text-gray-500 mb-6">Start by creating your first project idea</p>
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">No projects yet</h3>
+              <p className="text-gray-500 mb-6 text-sm md:text-base">Start by creating your first project idea</p>
               <Link href="/idea" className="btn-primary inline-flex items-center gap-2">
                 <Plus className="w-5 h-5" />
                 Create First Project
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {projects.map((project) => (
                 <div key={project.id} className="card hover:border-primary/50 transition-all group">
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="badge-emerald">{project.domain}</div>
+                  <div className="p-4 md:p-6">
+                    <div className="flex items-start justify-between mb-3 md:mb-4">
+                      <div className="badge-emerald text-xs">{project.domain}</div>
                       <span className="text-xs text-gray-400 flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
                         {formatDate(project.created_at)}
                       </span>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{project.title}</h3>
-                    <p className="text-sm text-gray-500 line-clamp-2 mb-4">{project.problem}</p>
+                    <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 line-clamp-1">{project.title}</h3>
+                    <p className="text-sm text-gray-500 line-clamp-2 mb-3 md:mb-4">{project.problem}</p>
 
-                    <div className="flex items-center gap-2 flex-wrap mb-4">
+                    <div className="flex items-center gap-2 flex-wrap mb-3 md:mb-4">
                       {(project.tech_stack || []).slice(0, 3).map((tech, i) => (
                         <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-md text-gray-600">
                           {tech}

@@ -11,7 +11,7 @@
 
 :root {
     /* Sanctuary AI Design System */
-    --primary: #044434; /* emerald-600 */
+    --primary: #07333d; /* emerald-600 74b5a5*/
     --primary-hover: #047857; /* emerald-700 */
     --accent-soft: #ecfdf5; /* emerald-50 */
     --text-main: #111827; /* gray-900 */
@@ -42,7 +42,7 @@
     }
 
     .section {
-        @apply py-24 px-6;
+        @apply py-12 md:py-24 px-4 md:px-6;
     }
 
     .container {
