@@ -27,6 +27,7 @@ export default function IdeaGenerator() {
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [selectedIdea, setSelectedIdea] = useState<Idea | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function handleTemplateClick(template: string) {
     setSelectedTemplate(template);
@@ -36,6 +37,7 @@ export default function IdeaGenerator() {
   async function generateIdeas() {
     if (!domain.trim()) return;
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch('/api/idea', {
         method: 'POST',
@@ -46,8 +48,12 @@ export default function IdeaGenerator() {
       if (data.ideas) {
         setIdeas(data.ideas);
       }
-    } catch (error) {
-      console.error('Error:', error);
+      if (data.error) {
+        setError(data.error);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      setError('Failed to generate ideas. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -153,7 +159,7 @@ export default function IdeaGenerator() {
 
               <button
                 onClick={generateIdeas}
-                disabled={!domain.trim() || loading}
+                disabled={Boolean(!domain.trim() || loading)}
                 className="btn-primary w-full py-4 text-lg shadow-emerald-200/50"
               >
                 {loading ? (
@@ -168,6 +174,12 @@ export default function IdeaGenerator() {
                   </span>
                 )}
               </button>
+
+              {error && (
+                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  {error}. Using fallback model...
+                </div>
+              )}
             </div>
 
             {/* Results Section */}
